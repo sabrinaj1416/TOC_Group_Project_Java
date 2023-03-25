@@ -1,0 +1,98 @@
+package model;
+
+import java.util.*;
+
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
+public class VendingMachineGUI extends Application {
+    // Define the items in the vending machine and their prices
+    private static final Map<String, Integer> itemPrices = new HashMap<>();
+    static {
+        itemPrices.put("N", 10);  // napkins
+        itemPrices.put("K", 25);  // knives
+        itemPrices.put("F", 15);  // forks
+        itemPrices.put("S", 20);  // spoons
+    }
+    
+    // Define the coins accepted by the vending machine and their values
+    private static final Map<String, Integer> coinValues = new HashMap<>();
+    static {
+        coinValues.put("α", 5);  // $5 coin
+        coinValues.put("β", 10); // $10 coin
+        coinValues.put("γ", 20); // $20 coin
+    }
+    
+    // Define the current inventory of items in the vending machine
+    private Map<String, Integer> itemInventory = new HashMap<>();
+    {
+        itemInventory.put("N", 20);  // napkins
+        itemInventory.put("K", 20);  // knives
+        itemInventory.put("F", 20);  // forks
+        itemInventory.put("S", 20);  // spoons
+    }
+    
+    // Define the current balance of coins in the vending machine
+    private Map<String, Integer> coinBalance = new HashMap<>();
+    {
+        coinBalance.put("α", 0);  // $5 coin
+        coinBalance.put("β", 0);  // $10 coin
+        coinBalance.put("γ", 0);  // $20 coin
+    }
+    
+    // Define the GUI components
+    private TextField inputField = new TextField();
+    private Label outputLabel = new Label();
+    
+    @Override
+    public void start(Stage primaryStage) {
+        // Set up the grid layout for the GUI
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        
+        // Add the input field to the grid
+        grid.add(new Label("Enter string: "), 0, 0);
+        grid.add(inputField, 1, 0);
+        
+        // Add the output label to the grid
+        grid.add(outputLabel, 0, 1, 2, 1);
+        outputLabel.setAlignment(Pos.CENTER);
+        
+        // Add the buttons to the grid
+        HBox buttonBox = new HBox();
+        buttonBox.setAlignment(Pos.CENTER);
+        Button dispenseButton = new Button("Dispense");
+        Button refundButton = new Button("Refund");
+        buttonBox.getChildren().addAll(dispenseButton, refundButton);
+        grid.add(buttonBox, 0, 2, 2, 1);
+        
+        // Set up the event handlers for the buttons
+        dispenseButton.setOnAction(event -> {
+            String input = inputField.getText().toUpperCase();
+            String output = dispenseItems(input);
+            outputLabel.setText(output);
+            inputField.clear();
+        });
+        
+        refundButton.setOnAction(event -> {
+            String input = inputField.getText().toUpperCase();
+            String output = refundCoins(input);
+            outputLabel.setText(output);
+            inputField.clear();
+        });}
+        
+        // Set up
+        
+        public static void main(String[] args) {
+        	launch(args);
+        	}
+}
