@@ -1,0 +1,52 @@
+package model;
+
+import java.awt.Button;
+import java.awt.Label;
+import java.awt.TextField;
+import java.util.*;
+
+public class VendingMachine extends Application {
+    // Define the items in the vending machine and their prices
+    private static final Map<String, Integer> itemPrices = new HashMap<>();
+    static {
+        itemPrices.put("N", 10);  // napkins
+        itemPrices.put("K", 25);  // knives
+        itemPrices.put("F", 15);  // forks
+        itemPrices.put("S", 20);  // spoons
+    }
+    
+    // Define the coins accepted by the vending machine and their values
+    private static final Map<String, Integer> coinValues = new HashMap<>();
+    static {
+        coinValues.put("a", 5);  // $5 coin
+        coinValues.put("b", 10); // $10 coin
+        coinValues.put("y", 20); // $20 coin
+    }
+    
+    // Define the current inventory of items in the vending machine
+    private Map<String, Integer> itemInventory = new HashMap<>();
+    {
+        itemInventory.put("N", 20);  // napkins
+        itemInventory.put("K", 20);  // knives
+        itemInventory.put("F", 20);  // forks
+        itemInventory.put("S", 20);  // spoons
+    }
+    
+    // Define the current balance of coins in the vending machine
+    private Map<String, Integer> coinBalance = new HashMap<>();
+    {
+        coinBalance.put("a", 0);  // $5 coin
+        coinBalance.put("b", 0);  // $10 coin
+        coinBalance.put("y", 0);  // $20 coin
+    }
+    
+    // Define the GUI components
+    private TextField inputField = new TextField();
+    private Label outputLabel = new Label();
+    private Button dispenseButton = new Button("Dispense");
+    private Button refundButton = new Button("Refund");
+    private Button coinAlphaButton = new Button("a");
+    private Button coinBetaButton = new Button("b");
+    private Button coinGammaButton = new Button("y");
+    
+}
